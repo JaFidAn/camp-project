@@ -16,12 +16,9 @@ export default function MatchList() {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Date and Time</Table.HeaderCell>
-            <Table.HeaderCell>Home Team</Table.HeaderCell>
-            <Table.HeaderCell>Away Team</Table.HeaderCell>
-            <Table.HeaderCell>FT1</Table.HeaderCell>
-            <Table.HeaderCell>FT2</Table.HeaderCell>
-            <Table.HeaderCell>HT1</Table.HeaderCell>
-            <Table.HeaderCell>HT2</Table.HeaderCell>
+            <Table.HeaderCell>Match</Table.HeaderCell>
+            <Table.HeaderCell>Full Time</Table.HeaderCell>
+            <Table.HeaderCell>Half Time</Table.HeaderCell>
             <Table.HeaderCell>League</Table.HeaderCell>
             <Table.HeaderCell>Country</Table.HeaderCell>
           </Table.Row>
@@ -31,12 +28,9 @@ export default function MatchList() {
           {matches.map((match) => (
             <Table.Row key={match.matchID}>
               <Table.Cell>{match.dateTime}</Table.Cell>
-              <Table.Cell>{match.homeTeamName}</Table.Cell>
-              <Table.Cell>{match.awayTeamName}</Table.Cell>
-              <Table.Cell>{match.fT1}</Table.Cell>
-              <Table.Cell>{match.fT2}</Table.Cell>
-              <Table.Cell>{match.hT1}</Table.Cell>
-              <Table.Cell>{match.hT2}</Table.Cell>
+              <Table.Cell>{match.homeTeamName} - {match.awayTeamName}</Table.Cell>
+              <Table.Cell>{match.fT1} : {match.fT2}</Table.Cell>
+              <Table.Cell>{match.hT1} : {match.hT2}</Table.Cell>
               <Table.Cell>{match.leagueName}</Table.Cell>
               <Table.Cell>{match.countryName}</Table.Cell>
             </Table.Row>
