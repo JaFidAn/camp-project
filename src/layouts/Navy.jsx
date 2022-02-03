@@ -1,8 +1,25 @@
-import React from 'react'
-import { Button, Container, Menu } from 'semantic-ui-react'
+import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Container, Menu } from 'semantic-ui-react'
 import PrognosedSummary from './PrognosedSummary'
+import SignedIn from './SignedIn'
+import SignedOut from './SignedOut'
 
-export default function navy() {
+
+export default function Navy() {
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const navigate = useNavigate();
+
+  function handleSignOut(){
+    setIsAuthenticated(false);
+    navigate("/");
+  }
+
+  function handleSignIn(){
+    setIsAuthenticated(true);
+    navigate("/");
+  }
+
   return (
     <div>
       <Menu inverted fixed='top'>
@@ -19,10 +36,7 @@ export default function navy() {
         <Menu.Menu position='right'>
 
           <PrognosedSummary/>
-
-          <Menu.Item>
-            <Button primary>Sign Up</Button>
-          </Menu.Item>
+          {isAuthenticated ? <SignedIn signOut={handleSignOut}/> : <SignedOut signIn={handleSignIn}/>}
         </Menu.Menu>
         </Container>
       </Menu>

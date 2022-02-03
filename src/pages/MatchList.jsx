@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Icon, Menu, Table } from 'semantic-ui-react'
 import AllMatchService from '../services/allMatchService'
 
@@ -8,17 +9,17 @@ export default function MatchList() {
   useEffect(()=>{
     let allMatchService = new AllMatchService();
     allMatchService.getAllMatch().then(result=>setMatches(result.data.data))
-  })
+  }, [])
 
   return (
     <div>
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Date and Time</Table.HeaderCell>
             <Table.HeaderCell>Match</Table.HeaderCell>
             <Table.HeaderCell>Full Time</Table.HeaderCell>
             <Table.HeaderCell>Half Time</Table.HeaderCell>
+            <Table.HeaderCell>Date and Time</Table.HeaderCell>
             <Table.HeaderCell>League</Table.HeaderCell>
             <Table.HeaderCell>Country</Table.HeaderCell>
           </Table.Row>
@@ -27,10 +28,10 @@ export default function MatchList() {
         <Table.Body>
           {matches.map((match) => (
             <Table.Row key={match.matchID}>
-              <Table.Cell>{match.dateTime}</Table.Cell>
-              <Table.Cell>{match.homeTeamName} - {match.awayTeamName}</Table.Cell>
+              <Table.Cell><Link to={`/allmatches/${match.matchID}`} >{match.homeTeamName} - {match.awayTeamName}</Link> </Table.Cell>
               <Table.Cell>{match.fT1} : {match.fT2}</Table.Cell>
               <Table.Cell>{match.hT1} : {match.hT2}</Table.Cell>
+              <Table.Cell>{match.dateTime}</Table.Cell>
               <Table.Cell>{match.leagueName}</Table.Cell>
               <Table.Cell>{match.countryName}</Table.Cell>
             </Table.Row>
