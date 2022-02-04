@@ -1,15 +1,26 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Icon, Menu, Table } from 'semantic-ui-react'
+import { Icon, Menu, Table, Button } from 'semantic-ui-react'
 import AllMatchService from '../services/allMatchService'
+import { addToPrognose } from '../store/actions/prognoseActions'
+import { toast } from 'react-toastify'
 
 export default function MatchList() {
-  const [matches, setMatches] = useState([])
+
+  const dispatch = useDispatch();
+
+  const [matches, setMatches] = useState([]);
 
   useEffect(()=>{
     let allMatchService = new AllMatchService();
     allMatchService.getAllMatch().then(result=>setMatches(result.data.data))
   }, [])
+
+  const handleAddToPrognose=(match)=>{
+    dispatch(addToPrognose(match));
+    toast.success(`${match.homeTeamName} - ${match.awayTeamName} added`)
+  }
 
   return (
     <div>
@@ -22,6 +33,7 @@ export default function MatchList() {
             <Table.HeaderCell>Date and Time</Table.HeaderCell>
             <Table.HeaderCell>League</Table.HeaderCell>
             <Table.HeaderCell>Country</Table.HeaderCell>
+            <Table.HeaderCell>Add To Prognose</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -34,6 +46,7 @@ export default function MatchList() {
               <Table.Cell>{match.dateTime}</Table.Cell>
               <Table.Cell>{match.leagueName}</Table.Cell>
               <Table.Cell>{match.countryName}</Table.Cell>
+              <Table.Cell><Button primary onClick={()=>handleAddToPrognose(match)} >ADD</Button></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

@@ -5,10 +5,12 @@ import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
 import { Routes, Route } from 'react-router-dom'
 import MatchDetails from '../pages/MatchDetails'
 import PrognoseDetail from '../pages/PrognoseDetail'
+import { ToastContainer } from 'react-toastify'
 
 export default function Dashboard() {
   return (
     <div>
+      <ToastContainer position='bottom-right'/>
       <Grid>
         <GridRow>
           <GridColumn width={3}>

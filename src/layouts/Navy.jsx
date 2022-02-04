@@ -4,9 +4,11 @@ import { Container, Menu } from 'semantic-ui-react'
 import PrognosedSummary from './PrognosedSummary'
 import SignedIn from './SignedIn'
 import SignedOut from './SignedOut'
+import { useSelector } from 'react-redux'
 
 
 export default function Navy() {
+  const { prognoseItems } = useSelector((state) => state.prognose)
   const [isAuthenticated, setIsAuthenticated] = useState(true)
   const navigate = useNavigate();
 
@@ -35,7 +37,7 @@ export default function Navy() {
 
         <Menu.Menu position='right'>
 
-          <PrognosedSummary/>
+          {prognoseItems.length>0&&<PrognosedSummary/>}
           {isAuthenticated ? <SignedIn signOut={handleSignOut}/> : <SignedOut signIn={handleSignIn}/>}
         </Menu.Menu>
         </Container>
